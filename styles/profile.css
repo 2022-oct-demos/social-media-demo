@@ -1,0 +1,10 @@
+.profile-list-item {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.profile-link {
+    margin-left: 5px;
+    margin-right: 10px;
+}
