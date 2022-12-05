@@ -3,7 +3,6 @@ export function renderProfile(profileObject) {
     const img = document.createElement('img');
     const p = document.createElement('p');
     const a = document.createElement('a');
-    //<img id="preview" class="avatar" alt="avatar preview" src="/assets/avatar.jpeg" />
 
     div.classList.add('profile-list-item');
     img.classList.add('avatar');
