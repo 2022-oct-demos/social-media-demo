@@ -30,6 +30,11 @@ export async function signOutUser() {
 /* Data functions */
 
 //upsertProfile
+export async function upsertProfile(profile) {
+    const response = await client.from('profiles').upsert(profile).single();
+
+    return checkError(response);
+}
 
 //uploadImage
 
