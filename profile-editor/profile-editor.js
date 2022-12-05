@@ -7,6 +7,7 @@ const profileForm = document.getElementById('profile-form');
 const updateButton = profileForm.querySelector('button');
 const userNameInput = profileForm.querySelector('[name=username]');
 const avatarInput = profileForm.querySelector('[name=avatar]');
+const bioInput = profileForm.querySelector('[name="bio"]');
 
 let error = null;
 let profile = null;
@@ -27,6 +28,9 @@ window.addEventListener('load', async () => {
             if (profile.avatar_url) {
                 preview.src = profile.avatar_url;
             }
+            if (profile.bio) {
+                bioInput.value = profile.bio;
+            }
         }
     }
 });
@@ -39,10 +43,9 @@ profileForm.addEventListener('submit', async (e) => {
 
     const formData = new FormData(profileForm);
     // intial profile object
-    const profile = {
+    const profileObj = {
         username: formData.get('username'),
         bio: formData.get('bio'),
-        user_id: user.id,
     };
 
     //get avatar file from form
@@ -54,10 +57,10 @@ profileForm.addEventListener('submit', async (e) => {
 
         const url = await uploadImage(imagePath, imageFile);
 
-        profile.avatar_url = url;
+        profileObj.avatar_url = url;
     }
 
-    const response = await upsertProfile(profile);
+    const response = await upsertProfile(profileObj);
 
     error = response.error;
 

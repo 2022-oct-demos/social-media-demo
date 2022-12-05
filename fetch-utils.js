@@ -33,13 +33,11 @@ export async function signOutUser() {
 export async function upsertProfile(profile) {
     const response = await client
         .from('profiles')
-        .update(profile)
-        .match({ user_id: profile.user_id })
+        .upsert(profile, { onConflict: 'user_id' })
         .single();
-    console.log('response- upsert', response);
+
     return checkError(response);
 }
-// add in a create function to create the profile for each user
 
 //uploadImage
 export async function uploadImage(imagePath, imageFile) {
@@ -62,7 +60,7 @@ export async function uploadImage(imagePath, imageFile) {
 }
 
 export async function getProfile(user_id) {
-    const response = await client.from('profiles').select('*').match({ user_id });
+    const response = await client.from('profiles').select('*').match({ user_id }).maybeSingle();
     // ({ user_id }) = ({user_id : user_id})
     return response;
 }
