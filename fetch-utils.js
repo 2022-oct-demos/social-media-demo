@@ -31,15 +31,39 @@ export async function signOutUser() {
 
 //upsertProfile
 export async function upsertProfile(profile) {
-    const response = await client.from('profiles').upsert(profile).single();
-
+    const response = await client
+        .from('profiles')
+        .update(profile)
+        .match({ user_id: profile.user_id })
+        .single();
+    console.log('response- upsert', response);
     return checkError(response);
 }
+// add in a create function to create the profile for each user
 
 //uploadImage
+export async function uploadImage(imagePath, imageFile) {
+    // use the storage bucket to upload the image to and then use it to get the public URL
+    const bucket = client.storage.from('avatars');
+
+    const response = await bucket.upload(imagePath, imageFile, {
+        cacheControl: '3600',
+        // we want to replace and existing file with same name
+        upsert: true,
+    });
+
+    if (response.error) {
+        return null;
+    }
+    // construct the url to the image
+    const url = `${SUPABASE_URL}/storage/v1/object/public/${response.data.Key}`;
+
+    return url;
+}
 
 export async function getProfile(user_id) {
-    const response = await client.from('profile').select('*').match({ user_id }).maybeSingle();
+    const response = await client.from('profiles').select('*').match({ user_id });
+    // ({ user_id }) = ({user_id : user_id})
     return response;
 }
 
