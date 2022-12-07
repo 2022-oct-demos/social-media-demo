@@ -5,6 +5,7 @@ import {
     getProfileById,
     getUser,
     incrementStars,
+    onMessage,
 } from '../fetch-utils.js';
 import { renderMessages } from '../render-utils.js';
 
@@ -25,6 +26,11 @@ window.addEventListener('load', async () => {
         return;
     }
     fetchAndDisplayProfile();
+
+    onMessage(async (payload) => {
+        console.log('payload', payload);
+        fetchAndDisplayProfile();
+    });
 });
 
 messageForm.addEventListener('submit', async (e) => {
@@ -59,14 +65,14 @@ messageForm.addEventListener('submit', async (e) => {
         messageForm.reset();
     }
     //- (before we implement realtime) call our fetch&Display function
-    await fetchAndDisplayProfile();
+    // await fetchAndDisplayProfile();
 });
 
 async function fetchAndDisplayProfile() {
     profileDetailEl.textContent = '';
 
     const profile = await getProfileById(id);
-    console.log('profile', profile);
+    // console.log('profile', profile);
     imgEl.src = profile.avatar_url;
     usernameHeaderEl.textContent = profile.username;
 
