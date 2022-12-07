@@ -101,10 +101,10 @@ export async function createMessage(message) {
     return checkError(response);
 }
 
-export function onMessage(handleMessage) {
+export function onMessage(profileId, handleMessage) {
     client
         // what table and what rows are we interested in?
-        .from(`messages`)
+        .from(`messages:recipient_id=eq.${profileId}`)
         // what type of changes are we interested in?
         .on('INSERT', handleMessage)
         // okay do it!

@@ -27,7 +27,7 @@ window.addEventListener('load', async () => {
     }
     fetchAndDisplayProfile();
 
-    onMessage(async (payload) => {
+    onMessage(id, async (payload) => {
         console.log('payload', payload);
         fetchAndDisplayProfile();
     });
