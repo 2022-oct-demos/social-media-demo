@@ -30,7 +30,8 @@ export function renderMessages(profile) {
     //for (let message of profile.messages)
     // substitute "message" for "profile.messages[i]"
     for (let i = 0; i < profile.messages.length; i++) {
-        console.log('i', profile.messages[i]);
+        // for (let i = profile.messages.length - 1; i > -1; i--)
+        //console.log('i', profile.messages[i]);
         const li = document.createElement('p');
         li.classList.add('message');
 
@@ -39,7 +40,7 @@ export function renderMessages(profile) {
 
         const senderSpan = document.createElement('span');
         senderSpan.classList.add('from');
-        senderSpan.textContent = profile.messages[i].from_user;
+        senderSpan.textContent = profile.messages[i].sender;
 
         const dateSpan = document.createElement('span');
         dateSpan.classList.add('created-date');
