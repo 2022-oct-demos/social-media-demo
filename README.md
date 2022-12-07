@@ -1,6 +1,8 @@
 # Plan
 
-## Table
+## Part A
+
+### Table
 
     - profiles
         - id
@@ -10,13 +12,13 @@
         - stars
         - avatar_url
 
-## Pages
+### Pages
 
     - profile editor/creator
     - profile list (home)
     - profile detail
 
-### HTML
+#### HTML
 
     - editor page
         - FORM
@@ -32,7 +34,7 @@
         - hardcode an img & header
         - stars detail container
 
-### Events
+#### Events
 
     - editor page
         - page load -> getting profile information from supabase and display on form (if exists)
@@ -48,7 +50,7 @@
     - profiles list
         - page load fetch
 
-### Functions
+#### Functions
 
     - uploadImage(imagePath, imageFile)
     - upsertProfile(profile)
@@ -63,3 +65,5 @@
     - error handling & button disable
     - profiles list
     - profile detail page & stars up and down votes
+
+---
